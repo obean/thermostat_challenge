@@ -10,7 +10,8 @@
 <body>
 <a href="http://jquery.com/">jQuery</a>
 <section>
-  <h1 id="temperature"></h1>
+  Thermostat temp: <h1 id="temperature"></h1>
+  Outside temp is: <h1 id="outside-temperature"></h1>
   <p>
     <button id="temperature-up">+</button>
     <button id="temperature-down">-</button>
@@ -24,6 +25,11 @@
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script>$(document).ready(function () {
   var thermostat = new Thermostat;
+
+  $.get("http://api.openweathermap.org/data/2.5/weather?q=London&appid=16f42bf1b7c2d1ff6c5fba304885dc11",
+    function(weather) {
+    $('#outside-temperature').text(Math.round(weather.main.temp-273.15))})
+
   $('#temperature').text(thermostat.getCurrentTemp())
   $('#power-saving-status').text(thermostat.getPowerSavingStatus())
 
