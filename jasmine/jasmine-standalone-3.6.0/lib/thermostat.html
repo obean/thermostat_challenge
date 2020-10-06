@@ -9,6 +9,7 @@
     <title> Thermostat </title>
   </head>
   <body>
+      <a href="http://jquery.com/">jQuery</a>
     <section>
       <h1 id="temperature"></h1>
       <p>
@@ -21,6 +22,27 @@
       </p>
     </section>
     <script src="../src/thermostat.js"> </script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"> </script>
+    <script>$(document).ready(function() { 
+        var thermostat = new Thermostat;
+        $('#temperature').text(thermostat.getCurrentTemp())
+        $('#temperature-up').click(function() {thermostat.up(); 
+          $('#temperature').text(thermostat.getCurrentTemp())
+        })
+        $('#temperature-down').click(function() {thermostat.down();
+          $('#temperature').text(thermostat.getCurrentTemp())
+        })
+        
+        
+        
+        
+        
+        
+        
+        
+        })
+      </script>
+    
   </body>
 </html>
 
