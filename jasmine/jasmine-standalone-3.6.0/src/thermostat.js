@@ -44,4 +44,11 @@ class Thermostat {
   getCurrentTemp() {
     return this.currentTemp;
   }
+  getPowerSavingStatus() {
+    if(this.powerSavingMode === true) {
+      return 'on';
+    } else {
+      return 'off';
+    }
+  }
 }
