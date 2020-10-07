@@ -12,10 +12,12 @@
 <section>
   Thermostat temp: <h1 id="temperature"></h1>
   Outside temp is: <h1 id="outside-temperature"></h1>
-  <form >
-    <input type="text" placeholder="London" id="weather-location">
-    <input type="submit" value="get weather" id="weather-submit">
-  </form>
+  London Temperature: <h1 id="london-weather"></h1>
+  Energy Usage: <h1 id="energy-usage"></h1>
+<form >
+  <input type="text" id="weather-location" placeholder="choose a city">
+  <input type="submit" id="weather-submit" value="get Weather">
+</form>
   <p>
     <button id="temperature-up">+</button>
     <button id="temperature-down">-</button>
@@ -30,9 +32,6 @@
 <script>$(document).ready(function () {
   var thermostat = new Thermostat;
 
-  //  $.get("http://api.openweathermap.org/data/2.5/weather?q=London&appid=16f42bf1b7c2d1ff6c5fba304885dc11",
-  //   function(weather) {
-  //   $('#outside-temperature').text(Math.round(weather.main.temp-273.15))})
 
   $('#temperature').text(thermostat.getCurrentTemp())
   $('#power-saving-status').text(thermostat.getPowerSavingStatus())
@@ -57,13 +56,20 @@
     thermostat.powerSavingOff();
     $('#power-saving-status').text(thermostat.getPowerSavingStatus())
   })
+  $('#energy-usage').text(function () {
+    thermostat.currentEnergyUsage()
+  })
   $('#weather-submit').click(function () {
     event.preventDefault();
     $.get("http://api.openweathermap.org/data/2.5/weather?q=" +  $('#weather-location').val() + "&appid=16f42bf1b7c2d1ff6c5fba304885dc11",
     function(weather) {
     $('#outside-temperature').text(Math.round(weather.main.temp-273.15))})
   })
+   $.get("http://api.openweathermap.org/data/2.5/weather?q=London&appid=16f42bf1b7c2d1ff6c5fba304885dc11", function (weather)
+    {$('#london-weather').text(Math.round(weather.main.temp-273.15))})
 })
+    
+
 </script>
 
 </body>
