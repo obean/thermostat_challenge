@@ -4,12 +4,25 @@
 <!-- down -->
 <!-- reset -->
 <html>
+  <style>
+    #main {
+      width: 600px;
+      margin: 300 auto; 
+    }
+    #circle {
+      width: 150px;
+      height: 150px;
+      background: red;
+      border-radius: 50%
+    }
+  </style>
 <head>
   <title> Thermostat </title>
 </head>
 <body>
 <a href="http://jquery.com/">jQuery</a>
-<section>
+<section id="main">
+  <div id="circle"></div>
   Thermostat temp: <h1 id="temperature"></h1>
   Outside temp is: <h1 id="outside-temperature"></h1>
   London Temperature: <h1 id="london-weather"></h1>
@@ -26,6 +39,7 @@
     <button id="powersaving-on">PSM on</button>
     <button id="powersaving-off">PSM off</button>
   </p>
+  <div id="bear"></div>
 </section>
 <script src="../src/thermostat.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
@@ -39,14 +53,19 @@
   $('#temperature-up').click(function () {
     thermostat.up();
     $('#temperature').text(thermostat.getCurrentTemp())
+    $('#energy-usage').text(thermostat.currentEnergyUsage())
+    $('#energy-usage').css("color", thermostat.currentEnergyUsageColour());
   })
   $('#temperature-down').click(function () {
     thermostat.down();
     $('#temperature').text(thermostat.getCurrentTemp())
+    $('#energy-usage').text(thermostat.currentEnergyUsage())
+    $('#energy-usage').css("color", thermostat.currentEnergyUsageColour());
   })
   $('#temperature-reset').click(function () {
     thermostat.reset();
     $('#temperature').text(thermostat.getCurrentTemp())
+    $('#energy-usage').text(thermostat.currentEnergyUsage())
   })
   $('#powersaving-on').click(function () {
     thermostat.powerSavingOn();
@@ -56,9 +75,8 @@
     thermostat.powerSavingOff();
     $('#power-saving-status').text(thermostat.getPowerSavingStatus())
   })
-  $('#energy-usage').text(function () {
-    thermostat.currentEnergyUsage()
-  })
+  $('#energy-usage').text(thermostat.currentEnergyUsage())
+
   $('#weather-submit').click(function () {
     event.preventDefault();
     $.get("http://api.openweathermap.org/data/2.5/weather?q=" +  $('#weather-location').val() + "&appid=16f42bf1b7c2d1ff6c5fba304885dc11",

@@ -34,6 +34,20 @@ class Thermostat {
       return 'high-usage'
     }
   }
+  getImage() {
+    if (this.currentTemp <= 25) {
+      return "https://i.pinimg.com/600x315/65/d0/2b/65d02bf52a4c30d6e77e1660bb6c84cb.jpg"
+    }
+  }
+  currentEnergyUsageColour() {
+    if(this.currentTemp < 18) {
+      return "blue"
+    } else if(this.currentTemp > 25) {
+      return "red"
+    } else {
+      return "purple"
+    }
+  }
   maximumTemp() {
     if(this.powerSavingMode === true) {
       return this.MAX_LIMIT_PSM_ON;
