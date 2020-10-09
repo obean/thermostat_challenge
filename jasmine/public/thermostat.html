@@ -1,8 +1,4 @@
-<!-- current temp -->
-<!--  Power Saving on -->
-<!-- up -->
-<!-- down -->
-<!-- reset -->
+<!DOCTYPE html>
 <html>
   <style>
     #main {
@@ -18,9 +14,10 @@
   </style>
 <head>
   <title> Thermostat </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-<a href="http://jquery.com/">jQuery</a>
+
 <section id="main">
   <div id="circle"></div>
   Thermostat temp: <h1 id="temperature"></h1>
@@ -31,7 +28,7 @@
   <input type="text" id="weather-location" placeholder="choose a city">
   <input type="submit" id="weather-submit" value="get Weather">
 </form>
-  <p>
+  <p action="/temperature" method="post">
     <button id="temperature-up">+</button>
     <button id="temperature-down">-</button>
     <button id="temperature-reset">reset</button>
@@ -41,9 +38,10 @@
   </p>
   <div id="bear"></div>
 </section>
-<script src="../src/thermostat.js"></script>
-<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script>$(document).ready(function () {
+<section>
+<script type="text/javascript" src="javascript/src/thermostat.js"></script>
+<script type="text/javascript" src="javascript/node_modules/jquery/dist/jquery.min.js"></script>
+<script> $(document).ready(function () {
   var thermostat = new Thermostat;
 
 
@@ -52,6 +50,8 @@
 
   $('#temperature-up').click(function () {
     thermostat.up();
+    console.log(thermostat.currentTemp)
+    $.post('/temperature', {new_temp: thermostat.currentTemp })
     $('#temperature').text(thermostat.getCurrentTemp())
     $('#energy-usage').text(thermostat.currentEnergyUsage())
     $('#energy-usage').css("color", thermostat.currentEnergyUsageColour());
@@ -89,7 +89,7 @@
     
 
 </script>
-
+</section>
 </body>
 </html>
 

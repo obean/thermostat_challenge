@@ -6,6 +6,8 @@ class Thermostat {
    this.MAX_LIMIT_PSM_OFF = 32;
    this.powerSavingMode = true;
   }
+
+
   up() {
     if(this.currentTemp < this.maximumTemp()) {
     this.currentTemp++;
@@ -56,7 +58,9 @@ class Thermostat {
     }
   }
   getCurrentTemp() {
-    return this.currentTemp;
+    $.get('/temperature', function(res){
+      $('#temperature').text(JSON.parse(res).temperature)
+    });
   }
   getPowerSavingStatus() {
     if(this.powerSavingMode === true) {
